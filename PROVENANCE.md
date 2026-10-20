@@ -1,8 +1,10 @@
 # Provenance: what existed before the hackathon
 
-The Meta AI Developer Hackathon starts on **26 October 2026, 17:00 UTC** (27 October, 02:00 JST). Everything in this repository was written before that time. The first commit and the tag `pre-event-2026-10-21` mark the published state.
+Afterglow (Muse Glimmer Afterglow) is built from the files below.
 
-This file lists each pre-existing file with its original date and the sha256 of the original. "Unchanged" means the file is byte-identical to the original. The other files were edited only to remove private paths and host names, to read paths from environment variables or a config file, and to reword comments and messages. No algorithm, constant or measurement setting changed.
+The Meta AI Developer Hackathon starts on **26 October 2026, 17:00 UTC** (27 October, 02:00 JST). Everything in this repository was written before that time. The tag `pre-event-2026-10-21` marks the first published commit; later commits before kickoff are listed in git.
+
+This file lists each pre-existing file with its original date and the sha256 of the original. "Unchanged" means the file is byte-identical to the original. The other files were edited only to remove private paths and host names, to read paths from environment variables or a config file, and to reword comments and messages. Three harness files also gained small config knobs so the same gate runs on other GPUs (noted per file). No algorithm, constant or measurement setting changed.
 
 Dates are file modification times in Japan Standard Time (UTC+9).
 
@@ -10,13 +12,13 @@ Dates are file modification times in Japan Standard Time (UTC+9).
 
 | Repo file | Origin | Original date (JST) | Original sha256 | Change for publication |
 |---|---|---|---|---|
-| `serve/cuda/common.py` | llama.cpp harness | 2026-10-21 03:25 | `e69432566a9abad7` | paths parameterised, host names and internal notes removed |
-| `serve/cuda/g0.py` | llama.cpp harness | 2026-10-21 03:25 | `e53fe5415896e720` | paths parameterised, host names and internal notes removed |
+| `serve/cuda/common.py` | llama.cpp harness | 2026-10-21 03:25 | `e69432566a9abad7` | paths parameterised, host names and internal notes removed; adds the `server.gpu_match` default |
+| `serve/cuda/g0.py` | llama.cpp harness | 2026-10-21 03:25 | `e53fe5415896e720` | paths parameterised, host names and internal notes removed; GPU-name gate reads `server.gpu_match`, drafter gate follows the configured arms |
 | `serve/cuda/g1.py` | llama.cpp harness | 2026-10-21 03:26 | `25b0626ce746df7a` | paths parameterised, host names and internal notes removed |
 | `serve/cuda/g2.py` | llama.cpp harness, KV snapshot | 2026-10-21 04:31 | `87d93a44e651e8ac` | paths parameterised, host names and internal notes removed |
 | `serve/cuda/make_prompts.py` | llama.cpp harness | 2026-10-21 03:27 | `22ab640712620d6c` | renamed from `tokenize.py` (it shadowed the stdlib module); paths parameterised, host names and internal notes removed |
-| `serve/cuda/selfcheck.py` | llama.cpp harness | 2026-10-21 04:31 | `a4fb43b196febab8` | renamed from `validate_root.py`; paths parameterised, host names and internal notes removed |
-| `serve/cuda/config.example.json` | llama.cpp harness | 2026-10-21 04:27 | `cf043c7d74eeb7b3` | rewritten as an example: placeholder paths, build-host fields removed |
+| `serve/cuda/selfcheck.py` | llama.cpp harness | 2026-10-21 04:31 | `a4fb43b196febab8` | renamed from `validate_root.py`; paths parameterised, host names and internal notes removed; cell counts follow the configured arms |
+| `serve/cuda/config.example.json` | llama.cpp harness | 2026-10-21 04:27 | `cf043c7d74eeb7b3` | rewritten as an example: placeholder paths, build-host fields removed, preset header and `gpu_match` added |
 | `serve/mac/run_mac_glimmer.sh` | MLX harness | 2026-10-21 03:03 | `9a69f77c8d346878` | paths parameterised, host names and internal notes removed |
 | `serve/mac/infer_mac_glimmer.py` | MLX harness, KV snapshot | 2026-10-21 03:05 | `dd19d2d9f4a71637` | docstring and one message reworded |
 | `drafter/scripts/analyze_eval.py` | drafter tune | 2026-10-14 19:39 | `e4c16d79ae5e2f78` | unchanged |
@@ -50,7 +52,7 @@ Dates are file modification times in Japan Standard Time (UTC+9).
 
 ## Files written for publication (21 October 2026)
 
-`README.md`, `NOTICE`, `PROVENANCE.md`, `docs/MEASUREMENTS.md`, `drafter/README.md`, `drafter/RELEASE.md`, `drafter/scripts/env.sh`, `drafter/requirements.txt`, `qlora/requirements.txt`, `.gitignore`. `LICENSE` is the Apache-2.0 text. `licenses/GLIMMER-LICENSE` and `licenses/GLIMMER-USAGE-POLICY.md` are verbatim copies from `meta-models/Muse-Glimmer-30B-assistant` at `e8192f3a`.
+`README.md`, `NOTICE`, `PROVENANCE.md`, `docs/MEASUREMENTS.md`, `docs/GPU-PRESETS.md`, `bench/rent-test.md`, `serve/cuda/config.rtx3090.json`, `serve/cuda/config.rtx5090.json`, `drafter/README.md`, `drafter/RELEASE.md`, `drafter/scripts/env.sh`, `drafter/requirements.txt`, `qlora/requirements.txt`, `.gitignore`. `LICENSE` is the Apache-2.0 text. `licenses/GLIMMER-LICENSE` and `licenses/GLIMMER-USAGE-POLICY.md` are verbatim copies from `meta-models/Muse-Glimmer-30B-assistant` at `e8192f3a`.
 
 ## Pre-existing artifacts outside git
 

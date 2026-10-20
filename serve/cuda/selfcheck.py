@@ -18,12 +18,13 @@ for name,passed,detail in common.run_sse_selftest():
 cfg=common.load_config(str(D/'config.json'))
 prompts=g1.load_prompts_g1(cfg['prompts']['g1_prompts'])
 m1=g1.build_manifest(cfg,prompts)
-assert len(m1['cells'])==84
-assert len({r['cell_id'] for r in m1['cells']})==84
-assert sum(r['group']=='4K' for r in m1['cells'])==72
-assert sum(r['group']=='32K' for r in m1['cells'])==12
+A=len(cfg['arms'])  # 6 items x A arms x 3 tries at 4K, 1 x A x 3 at 32K (84 cells for the 4-arm config)
+assert len(m1['cells'])==21*A
+assert len({r['cell_id'] for r in m1['cells']})==21*A
+assert sum(r['group']=='4K' for r in m1['cells'])==18*A
+assert sum(r['group']=='32K' for r in m1['cells'])==3*A
 assert all(len(prompts[r['item_id']]['prompt_ids'])==r['n_prompt'] for r in m1['cells'])
-assert len(g1.plan_groups(cfg))==4
+assert len(g1.plan_groups(cfg))==A
 cfg2=g2.load_config_g2(str(D/'config.json')); ps,der,src=g2.load_prompts_g2(cfg2)
 m2=g2.build_manifest_g2(cfg2,ps,der,src)
 assert len(m2['cells'])==33

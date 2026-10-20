@@ -1,4 +1,9 @@
 {
+  "_preset": {
+    "gpu": "RTX 4090 (Ada, sm_89, 24 GB)",
+    "status": "measured on 14 Oct 2026 (llama.cpp 69f201a); this v0.7.0 matrix not yet run",
+    "budget": "docs/GPU-PRESETS.md"
+  },
   "schema": 1,
   "remote_dir": "/srv/glimmer",
   "results_dir": "/srv/glimmer/results",
@@ -44,6 +49,7 @@
   },
   "server": {
     "host": "127.0.0.1",
+    "gpu_match": "4090",
     "port_base": 18501,
     "n_parallel": 1,
     "n_gpu_layers": 99,

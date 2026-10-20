@@ -1,0 +1,99 @@
+{
+  "_preset": {
+    "gpu": "RTX 5090 (Blackwell, sm_120, 32 GB)",
+    "status": "untested - needs a run on rented hardware",
+    "budget": "docs/GPU-PRESETS.md",
+    "note": "target is Meta's Dynamic Q4_K_XL; for Q6_K, make it with llama-quantize and set target, target_sha256 and target_bytes"
+  },
+  "schema": 1,
+  "remote_dir": "/srv/glimmer",
+  "results_dir": "/srv/glimmer/results",
+  "prompts_dir": "/srv/glimmer/prompts",
+  "runtime": {
+    "llama_server": "/srv/glimmer/runtime/bin/llama-server",
+    "llama_cpp_rev": "620d2225cc436ab0b001e3200e590e3b286ef9ab",
+    "llama_cpp_version": "v0.7.0/b11669",
+    "llama_cpp_date": "2026-10-15",
+    "build_sha256": "unknown",
+    "ld_library_path": "/srv/glimmer/runtime/bin",
+    "llama_tokenize": "/srv/glimmer/runtime/bin/llama-tokenize",
+    "cuda_arch": "120"
+  },
+  "models": {
+    "target": "/srv/glimmer/models/Muse-Glimmer-30B-KQuant-Dynamic-Q4_K_XL.gguf",
+    "target_sha256": "ac7023d6a4c704eb9af54ab53e476a66b7f5b6c0ef2fc4a8dde5253c291a6c38",
+    "target_bytes": 19653960832,
+    "official": "/srv/glimmer/models/dflash-Muse-Glimmer-30B-Q4_K_M.gguf",
+    "official_sha256": "b2e808bf656086fe86bd0d0bd990f01d33e377537a07c02d45371517c8b264ef",
+    "official_bytes": 1631208128,
+    "stock": "/srv/glimmer/models/dflash-stockmine-Q4_K_M.gguf",
+    "stock_sha256": "8dbc4f0313a6a1afca38fb69f81ff2ad06845c641a5edd2176236d1bdd1a19d4",
+    "stock_bytes": 1631205408,
+    "tuned": "/srv/glimmer/models/dflash-tuned-lr2e-05-Q4_K_M.gguf",
+    "tuned_sha256": "d78021f9d342266f720377b9f3633152ad4ccad51aa90761e033671f40d8a717",
+    "tuned_bytes": 1631205408
+  },
+  "prompts": {
+    "eval_source": "/srv/glimmer/prompts/prompts_eval.jsonl",
+    "heldout_ids": [
+      "ev-L00235-c",
+      "ev-L00254-r",
+      "ev-uc-0",
+      "ev-L00396-c",
+      "ev-L00429-r"
+    ],
+    "g1_prompts": "/srv/glimmer/prompts/prompts_g1.jsonl",
+    "g2_prompts": "/srv/glimmer/prompts/prompts_g2.jsonl",
+    "tokenizer": "/srv/glimmer/models/tokenizer.json",
+    "tokenizer_rev": "ecedda395d4d099b477d135a9a573eedaa5a7aad",
+    "tokenizer_gguf": "/srv/glimmer/models/Muse-Glimmer-30B-KQuant-Dynamic-Q4_K_XL.gguf"
+  },
+  "server": {
+    "host": "127.0.0.1",
+    "gpu_match": "5090",
+    "port_base": 18501,
+    "n_parallel": 1,
+    "n_gpu_layers": 99,
+    "flash_attn": "on",
+    "context_4k": 33536,
+    "context_32k": 33536,
+    "context_g2": 33536,
+    "slot_save_dir": "/srv/glimmer/slots"
+  },
+  "sampling": {
+    "temperature": 0.0,
+    "top_k": 1,
+    "top_p": 1.0,
+    "seed": 42,
+    "n_predict_heldout": 512,
+    "n_predict_synthetic": 256,
+    "cache_prompt": false,
+    "stream": true
+  },
+  "draft": {
+    "spec_type": "draft-dflash",
+    "n_max": 15,
+    "n_min": 0,
+    "p_min": 0.0,
+    "sampling": "greedy"
+  },
+  "arms": [
+    "target-only",
+    "official",
+    "stock",
+    "tuned"
+  ],
+  "g2": {
+    "snap_lengths": [
+      8192,
+      32768
+    ],
+    "snap_suffix": 64,
+    "snap_continuation": 64,
+    "prefix_len": 30720,
+    "prefix_suffix": 64,
+    "prefix_n_predict": 16,
+    "seed": 42,
+    "slot": 0
+  }
+}

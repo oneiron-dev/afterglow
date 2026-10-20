@@ -1,4 +1,4 @@
-# Release artifact: agent-tuned DFlash drafter for Muse Glimmer 30B
+# Release artifact: the Afterglow DFlash drafter for Muse Glimmer 30B
 
 Weights are not stored in git. They ship as release files.
 
@@ -17,9 +17,7 @@ Weights are not stored in git. They ship as release files.
 
 ## Where it is published
 
-**Not uploaded yet.** The plan: the primary home is a Hugging Face model repo, because the bf16 checkpoint (5.1 GB) is over GitHub's 2 GiB per-file release limit.
-
-- `oneiron-dev/muse-glimmer-30b-dflash-agent-tuned`: both GGUFs, `model.safetensors`, `config.json`, a model card with the table above, `LICENSE`, `USAGE_POLICY.md` and `NOTICE`.
-- A GitHub release on this repo, tag `drafter-v0.1.0`, carries the two GGUFs (each under 2 GiB) and a `SHA256SUMS` file, as a mirror.
+- **Hugging Face:** [`oneiron-dev/afterglow-dflash-drafter`](https://huggingface.co/oneiron-dev/afterglow-dflash-drafter). It holds all four files above, a model card, `LICENSE`, `USAGE_POLICY.md`, `NOTICE` and `SHA256SUMS`.
+- **GitHub release** [`pre-event-2026-10-21`](https://github.com/oneiron-dev/afterglow/releases/tag/pre-event-2026-10-21) on this repo: the tuned GGUF and `SHA256SUMS` only. The bf16 checkpoint (5.1 GB) is over GitHub's 2 GiB per-file limit, so it is on Hugging Face only.
 
 Check a download with `sha256sum -c SHA256SUMS`.

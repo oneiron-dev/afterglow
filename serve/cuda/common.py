@@ -64,6 +64,7 @@ DEFAULT_CONFIG = {
     },
     "server": {
         "host": "127.0.0.1",
+        "gpu_match": "4090",
         "port_base": 18501,
         "n_parallel": 1,
         "n_gpu_layers": 99,

@@ -1,4 +1,5 @@
-glimmer-nightly
+Afterglow
+Muse Glimmer Afterglow: your local model keeps learning after you go to sleep.
 Copyright 2026 Oneiron
 
 This product includes software developed by Oneiron, licensed under the
@@ -8,14 +9,17 @@ Apache License, Version 2.0 (see LICENSE).
 Muse Glimmer (Meta)
 -------------------------------------------------------------------------------
 
-This repository does not contain Muse Glimmer weights. Its scripts download,
-run, fine-tune and convert them, and its release artifacts include a model
+The Afterglow source repository contains no Muse Glimmer weights. Its scripts
+download, run, fine-tune and convert them. Its release artifacts (Hugging Face
+oneiron-dev/afterglow-dflash-drafter and GitHub Releases) contain models
 derived from them:
 
   * dflash-tuned-lr2e-05-Q4_K_M.gguf and the matching bf16 safetensors
     checkpoint: a fine-tune of meta-models/Muse-Glimmer-30B-assistant
     (revision e8192f3a8f617f74be2ce220360c89ef4789f39f), trained on hidden
     states and greedy outputs of the Muse Glimmer 30B target.
+  * dflash-stockmine-Q4_K_M.gguf: Meta's untuned drafter weights, converted
+    to GGUF and quantised by us (a control for the tune).
 
 Muse Glimmer models and their released artifacts are provided by Meta under
 the Apache License, Version 2.0. A copy of that licence, as published with

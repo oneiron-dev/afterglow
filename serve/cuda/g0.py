@@ -11,7 +11,7 @@ never substituted. Put the GGUF hashes in config; G0 reverifies sizes + shas
 (target 16GB hash fits the 5-min cap; --skip-target-hash records config sha only).
 
 Gate verifies:
-- GPU present AND name contains 4090 (+ power limit recorded)
+- GPU present AND name contains server.gpu_match (default 4090; presets set 3090/5090) (+ power limit recorded)
 - runtime binary exists, sha256 == config, --version ok, version mentions expected
   tag/short-rev, FULL --help contains spec-type, metrics, cache-prompt,
   slot-save-path, spec-draft (no truncation)
@@ -37,8 +37,8 @@ def _is_pending(v):
     return (not isinstance(v, str)) or v.strip() == "" or v == "unknown" or v.startswith("PENDING")
 
 
-def collect_nvidia():
-    out = {"available": False}
+def collect_nvidia(match="4090"):
+    out = {"available": False, "gpu_match": match}
     r = common.run_cmd(["nvidia-smi", "--query-gpu=name,memory.total,power.limit,driver_version",
                         "--format=csv,noheader"], timeout=30)
     if r["rc"] == 0 and r["out"].strip():
@@ -52,10 +52,10 @@ def collect_nvidia():
             out["driver"] = parts[3] if len(parts) > 3 else "unknown"
         except Exception:
             pass
-        out["is_4090"] = "4090" in out.get("name", "")
+        out["gpu_ok"] = match in out.get("name", "")
     else:
         out["error"] = (r["err"] or r["out"])[:1000]
-        out["is_4090"] = False
+        out["gpu_ok"] = False
     return out
 
 
@@ -227,13 +227,13 @@ def main():
     print("G0 config=%s outdir=%s" % (args.config, outdir), flush=True)
     print("G0 config_hash=%s" % common.config_hash(cfg), flush=True)
 
-    nvidia = collect_nvidia()
-    print("G0 gpu=%s is_4090=%s" % (nvidia.get("name", "unavailable"), nvidia.get("is_4090")), flush=True)
+    nvidia = collect_nvidia(str(cfg["server"].get("gpu_match", "4090")))
+    print("G0 gpu=%s gpu_ok=%s" % (nvidia.get("name", "unavailable"), nvidia.get("gpu_ok")), flush=True)
     server_bin = cfg["runtime"].get("llama_server", "")
     build = collect_build(server_bin, cfg)
     models = collect_models(cfg.get("models", {}), hash_target=(not args.skip_target_hash))
     ctx = collect_context(cfg)
-    disk_r = common.run_cmd(["df", "-h", "/data", "/"], timeout=30)
+    disk_r = common.run_cmd(["df", "-h", cfg.get("remote_dir", "/"), "/"], timeout=30)
     disk = {"rc": disk_r["rc"], "out": disk_r["out"][:2000]}
     ports = collect_ports(cfg["server"].get("port_base", 18501))
     prompts = collect_prompts(cfg)
@@ -241,7 +241,7 @@ def main():
     blocked = []
     if not nvidia.get("available"):
         blocked.append("gpu-unavailable")
-    elif not nvidia.get("is_4090"):
+    elif not nvidia.get("gpu_ok"):
         blocked.append("gpu-wrong-model:%s" % nvidia.get("name"))
     if not build.get("exists"):
         blocked.append("runtime-missing:%s" % server_bin)
@@ -260,7 +260,9 @@ def main():
                 blocked.append("flag-missing:%s" % f)
         if build.get("help_truncated"):
             blocked.append("help-capture-truncated")
-    for k in ("target", "official", "stock", "tuned"):
+    # gate the target plus every drafter the configured arms use (a 3-arm preset needs no stock control)
+    needed = ["target"] + [a for a in cfg.get("arms", []) if a in ("official", "stock", "tuned")]
+    for k in needed:
         m = models[k]
         if not m.get("exists"):
             blocked.append("model-missing:%s" % k)

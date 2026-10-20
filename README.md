@@ -1,8 +1,10 @@
-# glimmer-nightly
+# Afterglow
 
-Tools to run Meta's **Muse Glimmer 30B** on your own hardware and retrain parts of it at night:
+**Muse Glimmer Afterglow: your local model keeps learning after you go to sleep.**
 
-- **Serve** Glimmer on one RTX 4090 (llama.cpp + the official DFlash drafter) or on an Apple-silicon Mac (MLX-LM).
+Afterglow is a set of tools to run Meta's **Muse Glimmer 30B** on your own hardware and retrain parts of it at night:
+
+- **Serve** Glimmer on one RTX 4090 (llama.cpp + the official DFlash drafter) or on an Apple-silicon Mac (MLX-LM). Presets for the RTX 3090 and RTX 5090 are included, untested.
 - **Snapshot** the KV cache to disk and restore it, so a restarted server does not prefill the whole history again.
 - **Retrain at night:** a QLoRA adapter for the target, and a DFlash drafter retrain on the target's own outputs.
 - **Measure** all of it with resumable benchmarks that keep exact token IDs and the server's own counters.
@@ -17,10 +19,11 @@ We publish it as open source so that our hackathon entry can build on it, with t
 
 | Path | What it does | Written |
 |---|---|---|
-| `serve/cuda/` | llama.cpp harness: readiness gate (`g0.py`), speed matrix with and without DFlash drafters (`g1.py`), KV snapshot save/restore and prefix-cache reuse (`g2.py`), prompt builder (`make_prompts.py`), CPU self-check (`selfcheck.py`). Python stdlib only. | 21 Oct 2026 |
+| `serve/cuda/` | llama.cpp harness and per-GPU configs (`config.example.json` for the 4090, `config.rtx3090.json`, `config.rtx5090.json`): readiness gate (`g0.py`), speed matrix with and without DFlash drafters (`g1.py`), KV snapshot save/restore and prefix-cache reuse (`g2.py`), prompt builder (`make_prompts.py`), CPU self-check (`selfcheck.py`). Python stdlib only. | 21 Oct 2026 |
 | `serve/mac/` | MLX-LM benchmark: 4-bit decode speed, plus a prompt-cache save, reload and token-ID replay check. | 21 Oct 2026 |
 | `drafter/` | DFlash drafter tune: prompt split, target generation, hidden-tap extraction, fine-tune, GGUF conversion, eval, leak and recompute checks. | 14 Oct 2026 |
 | `qlora/` | Nightly QLoRA scaffolding: a training-rate measurement and a day-one before/after smoke on a synthetic day. | 14 Oct 2026 |
+| `docs/GPU-PRESETS.md`, `bench/rent-test.md` | RTX 3090 and 5090 VRAM budgets, derived from the 4090 measurements, and the test session to confirm them on rented hardware. | 21 Oct 2026 |
 | `examples/prompts_eval.jsonl` | 25 held-out eval prompts: 20 turns from fictional personas and 5 UltraChat `test_sft` first turns. | 14 Oct 2026 |
 | `qlora/fixtures/` | A synthetic day for one fictional persona (30 facts, preferences, one procedure) and a 10-item synthetic general slice. | 14 Oct 2026 |
 
@@ -47,9 +50,11 @@ M=$GLIMMER_HOME/models
 python3 drafter/scripts/hf_fetch.py meta-models/Muse-Glimmer-30B-GGUF 70bf1b61ac09f91b24d39038091b41c582bc5d7a $M \
   Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf dflash-Muse-Glimmer-30B-Q4_K_M.gguf
 python3 drafter/scripts/hf_fetch.py unsloth/Muse-Glimmer-30B-unsloth-bnb-4bit ecedda395d4d099b477d135a9a573eedaa5a7aad $M tokenizer.json
+python3 drafter/scripts/hf_fetch.py oneiron-dev/afterglow-dflash-drafter main $M \
+  dflash-tuned-lr2e-05-Q4_K_M.gguf dflash-stockmine-Q4_K_M.gguf
 ```
 
-The tuned drafter (`dflash-tuned-lr2e-05-Q4_K_M.gguf`, 1.63 GB) is a release artifact, not a file in git. See [drafter/RELEASE.md](drafter/RELEASE.md).
+The last line fetches our tuned drafter and the same-converter stock control (1.63 GB each) from [`oneiron-dev/afterglow-dflash-drafter`](https://huggingface.co/oneiron-dev/afterglow-dflash-drafter). They are release artifacts, not files in git. See [drafter/RELEASE.md](drafter/RELEASE.md).
 
 **3. Serve.** This runs the target and the official DFlash drafter, one slot, with KV snapshots enabled:
 
@@ -75,6 +80,19 @@ timeout --kill-after=10s 25m python3 serve/cuda/g2.py --config $GLIMMER_HOME/con
 ```
 
 Results go to `$GLIMMER_HOME/results/` as JSONL, one fsynced record per cell. A rerun skips only the cells that succeeded under the same manifest hash.
+
+## Other GPUs: RTX 3090 and RTX 5090 (untested)
+
+Both presets are **untested; they need a run on rented hardware**. The budgets are arithmetic from the 4090 measurements, shown in [docs/GPU-PRESETS.md](docs/GPU-PRESETS.md). The test session is [bench/rent-test.md](bench/rent-test.md).
+
+| Card | Build flag | Target + drafter | Serving context | Estimated VRAM, free of 24,000 / 32,000 MiB |
+|---|---|---|---|---|
+| RTX 3090 (Ampere, 24 GB) | `-DCMAKE_CUDA_ARCHITECTURES=86` | Q4_K_M + official DFlash | 32,768 | 18,906 MiB, 5,094 free |
+| RTX 4090 (Ada, 24 GB), measured | `=89` | Q4_K_M + official DFlash | 8,192 | 18,594 MiB measured |
+| RTX 5090 (Blackwell, 32 GB, CUDA ≥ 12.8) | `=120` | Dynamic Q4_K_XL + official DFlash | 131,072 | 22,917 MiB, 9,083 free |
+| RTX 5090 with a self-made Q6_K | `=120` | Q6_K + official DFlash | 65,536 | 26,636 MiB, 5,364 free |
+
+For the benchmarks, use `serve/cuda/config.rtx3090.json` or `serve/cuda/config.rtx5090.json` in place of `config.example.json`. Q8_0 does not fit a 5090 with the drafter. The 5090's NVFP4 path exists in SGLang, not in this repo.
 
 ## Run it on a Mac (Apple silicon, MLX)
 
@@ -112,4 +130,4 @@ This script is prepared and syntax-checked. **It has not been run yet.** MLX-LM 
 
 ## Licence
 
-Our code is licensed under [Apache-2.0](LICENSE). Meta releases the Muse Glimmer weights under Apache-2.0. The weights, and anything derived from them (the tuned drafter included), are also subject to the [Muse Glimmer Usage Policy](licenses/GLIMMER-USAGE-POLICY.md). [NOTICE](NOTICE) lists the third-party notices.
+Afterglow's code is licensed under [Apache-2.0](LICENSE). Meta releases the Muse Glimmer weights under Apache-2.0. The weights, and anything derived from them (the tuned drafter included), are also subject to the [Muse Glimmer Usage Policy](licenses/GLIMMER-USAGE-POLICY.md). [NOTICE](NOTICE) lists the third-party notices.
