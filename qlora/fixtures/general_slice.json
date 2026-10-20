@@ -1,0 +1,105 @@
+{
+  "status": "frozen smoke general slice; all synthetic; no owner data; no public MMLU; no model answers yet",
+  "count": 10,
+  "count_note": "Fixed 10 items (4 arithmetic, 3 reasoning, 3 tool JSON). Same 10 before/after. Not the preregistered 200-item slice.",
+  "synthetic_only": true,
+  "decoding": {
+    "greedy": true,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "reasoning_strength": "minimal",
+    "answer_channel": "forced to=user for budget; see preparation.md"
+  },
+  "items": [
+    {
+      "id": "G01",
+      "kind": "arithmetic",
+      "prompt": "What is 17 times 23? Reply with just the number.",
+      "gold": "391",
+      "scorer": "exact_number",
+      "scorer_note": "strip, remove commas/spaces, case-insensitive exact; truncated=fail"
+    },
+    {
+      "id": "G02",
+      "kind": "arithmetic",
+      "prompt": "What is 169 divided by 13? Reply with just the number.",
+      "gold": "13",
+      "scorer": "exact_number",
+      "scorer_note": "strip, remove commas/spaces, case-insensitive exact; truncated=fail"
+    },
+    {
+      "id": "G03",
+      "kind": "arithmetic",
+      "prompt": "What is 87 plus 156? Reply with just the number.",
+      "gold": "243",
+      "scorer": "exact_number",
+      "scorer_note": "strip, remove commas/spaces, case-insensitive exact; truncated=fail"
+    },
+    {
+      "id": "G04",
+      "kind": "arithmetic",
+      "prompt": "What is 1000 minus 647? Reply with just the number.",
+      "gold": "353",
+      "scorer": "exact_number",
+      "scorer_note": "strip, remove commas/spaces, case-insensitive exact; truncated=fail"
+    },
+    {
+      "id": "G05",
+      "kind": "reasoning",
+      "prompt": "All plimps are purple. Zed is a plimp. What colour is Zed? Reply with just the colour.",
+      "gold": "purple",
+      "scorer": "exact_word",
+      "scorer_note": "lower, strip punctuation/whitespace, exact; truncated=fail"
+    },
+    {
+      "id": "G06",
+      "kind": "reasoning",
+      "prompt": "Continue the sequence: 5, 25, 125, ? Reply with just the number.",
+      "gold": "625",
+      "scorer": "exact_number",
+      "scorer_note": "strip, remove commas/spaces, exact; truncated=fail"
+    },
+    {
+      "id": "G07",
+      "kind": "reasoning",
+      "prompt": "X is taller than Y. Y is taller than Z. Who is shortest? Reply with just the letter.",
+      "gold": "Z",
+      "scorer": "exact_letter",
+      "scorer_note": "upper, strip punctuation/whitespace, exact single letter; truncated=fail"
+    },
+    {
+      "id": "G08",
+      "kind": "tool",
+      "prompt": "Emit JSON only: {\"tool\": \"get_weather\", \"station\": \"Harbor-3\"}. Reply with JSON only, no other text.",
+      "gold": {
+        "tool": "get_weather",
+        "station": "Harbor-3"
+      },
+      "scorer": "json_exact",
+      "scorer_note": "extract first {..last }, parse JSON, dict equality; truncated=fail"
+    },
+    {
+      "id": "G09",
+      "kind": "tool",
+      "prompt": "Emit JSON only: {\"tool\": \"log_sample\", \"prefix\": \"QX9\", \"count\": 11}. Reply with JSON only, no other text.",
+      "gold": {
+        "tool": "log_sample",
+        "prefix": "QX9",
+        "count": 11
+      },
+      "scorer": "json_exact",
+      "scorer_note": "extract first {..last }, parse JSON, dict equality; truncated=fail"
+    },
+    {
+      "id": "G10",
+      "kind": "tool",
+      "prompt": "Emit JSON only: {\"tool\": \"set_channel\", \"channel\": 5}. Reply with JSON only, no other text.",
+      "gold": {
+        "tool": "set_channel",
+        "channel": 5
+      },
+      "scorer": "json_exact",
+      "scorer_note": "extract first {..last }, parse JSON, dict equality; truncated=fail"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "status": "frozen smoke recall probes; one paraphrase per fact; no model answers yet",
+  "persona": "Mira Sable, a fictional field-station operator. All facts, preferences and events are invented.",
+  "count_note": "30 facts x1 heldout =30 probes, NOT 90. Do not claim 90. Prefs/procedure descriptive only.",
+  "decoding": {
+    "greedy": true,
+    "do_sample": false,
+    "max_new_tokens": 96,
+    "reasoning_strength": "minimal",
+    "answer_channel": "forced to=user for budget; see preparation.md"
+  },
+  "items": [
+    {
+      "id": "F01",
+      "kind": "fact",
+      "key": "home station",
+      "prompt": "Which station does Mira call home? Reply with just the value.",
+      "heldout_question": "Which station does Mira call home?",
+      "gold": "Pelican-7",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F02",
+      "kind": "fact",
+      "key": "locker code",
+      "prompt": "What digits open Mira’s locker? Reply with just the value.",
+      "heldout_question": "What digits open Mira’s locker?",
+      "gold": "6482",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F03",
+      "kind": "fact",
+      "key": "rover name",
+      "prompt": "What is the name of Mira’s rover? Reply with just the value.",
+      "heldout_question": "What is the name of Mira’s rover?",
+      "gold": "Kestrel",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F04",
+      "kind": "fact",
+      "key": "rover battery threshold",
+      "prompt": "At what charge does Mira recharge the rover? Reply with just the value.",
+      "heldout_question": "At what charge does Mira recharge the rover?",
+      "gold": "37 percent",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F05",
+      "kind": "fact",
+      "key": "sample freezer",
+      "prompt": "Where does Mira freeze collected samples? Reply with just the value.",
+      "heldout_question": "Where does Mira freeze collected samples?",
+      "gold": "Bay C",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F06",
+      "kind": "fact",
+      "key": "daily radio check",
+      "prompt": "When is Mira’s morning radio test? Reply with just the value.",
+      "heldout_question": "When is Mira’s morning radio test?",
+      "gold": "06:40",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F07",
+      "kind": "fact",
+      "key": "radio channel",
+      "prompt": "Which channel is used for Mira’s radio check? Reply with just the value.",
+      "heldout_question": "Which channel is used for Mira’s radio check?",
+      "gold": "12",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F08",
+      "kind": "fact",
+      "key": "backup contact",
+      "prompt": "Who is Mira’s backup contact? Reply with just the value.",
+      "heldout_question": "Who is Mira’s backup contact?",
+      "gold": "Ivo Reed",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F09",
+      "kind": "fact",
+      "key": "project codename",
+      "prompt": "What is Mira’s current project called? Reply with just the value.",
+      "heldout_question": "What is Mira’s current project called?",
+      "gold": "Moss Lantern",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F10",
+      "kind": "fact",
+      "key": "sample label prefix",
+      "prompt": "What prefix goes on Mira’s sample labels? Reply with just the value.",
+      "heldout_question": "What prefix goes on Mira’s sample labels?",
+      "gold": "PL7",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F11",
+      "kind": "fact",
+      "key": "field route",
+      "prompt": "Which route does Mira take into the field? Reply with just the value.",
+      "heldout_question": "Which route does Mira take into the field?",
+      "gold": "north ridge",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F12",
+      "kind": "fact",
+      "key": "turnaround wind speed",
+      "prompt": "What wind speed makes Mira turn back? Reply with just the value.",
+      "heldout_question": "What wind speed makes Mira turn back?",
+      "gold": "28 kilometres per hour",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F13",
+      "kind": "fact",
+      "key": "lunch time",
+      "prompt": "At what time does Mira pause for lunch? Reply with just the value.",
+      "heldout_question": "At what time does Mira pause for lunch?",
+      "gold": "12:20",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F14",
+      "kind": "fact",
+      "key": "lunch place",
+      "prompt": "Where does Mira eat lunch? Reply with just the value.",
+      "heldout_question": "Where does Mira eat lunch?",
+      "gold": "blue shelter",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F15",
+      "kind": "fact",
+      "key": "water reserve",
+      "prompt": "How much water does Mira keep in reserve? Reply with just the value.",
+      "heldout_question": "How much water does Mira keep in reserve?",
+      "gold": "2.4 litres",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F16",
+      "kind": "fact",
+      "key": "camera ID",
+      "prompt": "Which camera belongs to Mira’s project? Reply with just the value.",
+      "heldout_question": "Which camera belongs to Mira’s project?",
+      "gold": "C-19",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F17",
+      "kind": "fact",
+      "key": "camera calibration day",
+      "prompt": "On which weekday does Mira calibrate the camera? Reply with just the value.",
+      "heldout_question": "On which weekday does Mira calibrate the camera?",
+      "gold": "Thursday",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F18",
+      "kind": "fact",
+      "key": "notebook colour",
+      "prompt": "What colour is Mira’s field notebook? Reply with just the value.",
+      "heldout_question": "What colour is Mira’s field notebook?",
+      "gold": "amber",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F19",
+      "kind": "fact",
+      "key": "sample batch size",
+      "prompt": "How many samples make one of Mira’s batches? Reply with just the value.",
+      "heldout_question": "How many samples make one of Mira’s batches?",
+      "gold": "18",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F20",
+      "kind": "fact",
+      "key": "inspection interval",
+      "prompt": "How often does Mira inspect the instrument? Reply with just the value.",
+      "heldout_question": "How often does Mira inspect the instrument?",
+      "gold": "45 minutes",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F21",
+      "kind": "fact",
+      "key": "sensor name",
+      "prompt": "What is Mira’s sensor called? Reply with just the value.",
+      "heldout_question": "What is Mira’s sensor called?",
+      "gold": "Finch",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F22",
+      "kind": "fact",
+      "key": "sensor calibration value",
+      "prompt": "Which value does Mira use to calibrate Finch? Reply with just the value.",
+      "heldout_question": "Which value does Mira use to calibrate Finch?",
+      "gold": "7.3",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F23",
+      "kind": "fact",
+      "key": "shipment day",
+      "prompt": "On which weekday does Mira ship samples? Reply with just the value.",
+      "heldout_question": "On which weekday does Mira ship samples?",
+      "gold": "Tuesday",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F24",
+      "kind": "fact",
+      "key": "shipping crate",
+      "prompt": "Which crate holds Mira’s outgoing samples? Reply with just the value.",
+      "heldout_question": "Which crate holds Mira’s outgoing samples?",
+      "gold": "crate 9",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F25",
+      "kind": "fact",
+      "key": "supply depot",
+      "prompt": "Which depot supplies Mira’s station? Reply with just the value.",
+      "heldout_question": "Which depot supplies Mira’s station?",
+      "gold": "Reed Point",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F26",
+      "kind": "fact",
+      "key": "generator cutoff",
+      "prompt": "When does Mira shut down the generator? Reply with just the value.",
+      "heldout_question": "When does Mira shut down the generator?",
+      "gold": "21:10",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F27",
+      "kind": "fact",
+      "key": "night lamp setting",
+      "prompt": "What level does Mira use for the night lamp? Reply with just the value.",
+      "heldout_question": "What level does Mira use for the night lamp?",
+      "gold": "level 2",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F28",
+      "kind": "fact",
+      "key": "archive folder",
+      "prompt": "In what folder does Mira archive this project? Reply with just the value.",
+      "heldout_question": "In what folder does Mira archive this project?",
+      "gold": "moss-2026-b",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F29",
+      "kind": "fact",
+      "key": "weekly review time",
+      "prompt": "When does Mira hold the weekly review? Reply with just the value.",
+      "heldout_question": "When does Mira hold the weekly review?",
+      "gold": "Friday 16:30",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "F30",
+      "kind": "fact",
+      "key": "emergency meeting point",
+      "prompt": "Where does Mira meet during an emergency? Reply with just the value.",
+      "heldout_question": "Where does Mira meet during an emergency?",
+      "gold": "orange mast",
+      "scorer": "fact_substring",
+      "scorer_note": "pass if normalized gold appears in normalized answer; truncated=fail"
+    },
+    {
+      "id": "P01",
+      "kind": "preference",
+      "prompt": "Summarise a 3-mile route for Mira.",
+      "probe": "Summarise a 3-mile route for Mira.",
+      "rule": "Use metric units.",
+      "rubric": "Kilometres as the primary distance unit.",
+      "scorer": "pref_p01",
+      "scorer_note": "pass if kilometres/km primary (contains km/kilometre) ; truncated=fail"
+    },
+    {
+      "id": "P02",
+      "kind": "preference",
+      "prompt": "Give Mira a routine end-of-day instrument status.",
+      "probe": "Give Mira a routine end-of-day instrument status.",
+      "rule": "Give at most three bullets in a routine status update.",
+      "rubric": "No more than three bullets.",
+      "scorer": "pref_p02",
+      "scorer_note": "pass if bullet count <=3 and >=1; truncated=fail"
+    },
+    {
+      "id": "P03",
+      "kind": "preference",
+      "prompt": "The filters are running low. What should you do next for Mira?",
+      "probe": "The filters are running low. What should you do next for Mira?",
+      "rule": "Ask before scheduling any supply order.",
+      "rubric": "Ask for approval; do not claim an order was scheduled.",
+      "scorer": "pref_p03",
+      "scorer_note": "pass if asks approval (contains ?/approve/confirm/may i/should i) and does not claim scheduled/ordered; truncated=fail"
+    },
+    {
+      "id": "W01",
+      "kind": "procedure",
+      "prompt": "Finch seems noisy. Plan a change to its sensitivity for Mira.",
+      "probe": "Finch seems noisy. Plan a change to its sensitivity for Mira.",
+      "rule": "Before changing a sensor setting: record the baseline, test the new setting on one spare sample, compare the results, then ask for approval before deployment.",
+      "rubric": [
+        "record baseline",
+        "test one spare sample",
+        "compare baseline and test",
+        "ask approval before deployment"
+      ],
+      "scorer": "procedure_all4",
+      "scorer_note": "pass if all 4 rubric phrases present (normalized substring); truncated=fail"
+    }
+  ]
+}

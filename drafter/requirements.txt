@@ -1,0 +1,15 @@
+# Versions used for the 14 Oct 2026 drafter tune (Python 3.12). setup.sh installs these with uv.
+torch==2.13.0
+transformers==5.17.0
+safetensors==0.8.0
+accelerate
+bitsandbytes==0.50.2
+numpy==2.3.5
+tokenizers==0.23.3
+sentencepiece==0.2.2
+huggingface-hub==1.33.0
+hf-xet==1.7.0
+jinja2
+protobuf
+einops
+certifi

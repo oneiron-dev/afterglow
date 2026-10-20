@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+glimmer-work/
+logs/
+results/
+smoke/
+slots/
+infer-mac-results/
+*.gguf
+*.safetensors
+*.bin
+.DS_Store

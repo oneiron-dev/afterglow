@@ -1,0 +1,248 @@
+{
+  "status": "fixture only; no training or inference performed",
+  "persona": "Mira Sable, a fictional field-station operator. All facts, preferences and events are invented.",
+  "facts": [
+    {
+      "id": "F01",
+      "key": "home station",
+      "value": "Pelican-7",
+      "day_utterance": "My home station is Pelican-7.",
+      "heldout_question": "Which station does Mira call home?"
+    },
+    {
+      "id": "F02",
+      "key": "locker code",
+      "value": "6482",
+      "day_utterance": "My locker code is 6482.",
+      "heldout_question": "What digits open Mira\u2019s locker?"
+    },
+    {
+      "id": "F03",
+      "key": "rover name",
+      "value": "Kestrel",
+      "day_utterance": "My rover name is Kestrel.",
+      "heldout_question": "What is the name of Mira\u2019s rover?"
+    },
+    {
+      "id": "F04",
+      "key": "rover battery threshold",
+      "value": "37 percent",
+      "day_utterance": "My rover battery threshold is 37 percent.",
+      "heldout_question": "At what charge does Mira recharge the rover?"
+    },
+    {
+      "id": "F05",
+      "key": "sample freezer",
+      "value": "Bay C",
+      "day_utterance": "My sample freezer is Bay C.",
+      "heldout_question": "Where does Mira freeze collected samples?"
+    },
+    {
+      "id": "F06",
+      "key": "daily radio check",
+      "value": "06:40",
+      "day_utterance": "My daily radio check is 06:40.",
+      "heldout_question": "When is Mira\u2019s morning radio test?"
+    },
+    {
+      "id": "F07",
+      "key": "radio channel",
+      "value": "12",
+      "day_utterance": "My radio channel is 12.",
+      "heldout_question": "Which channel is used for Mira\u2019s radio check?"
+    },
+    {
+      "id": "F08",
+      "key": "backup contact",
+      "value": "Ivo Reed",
+      "day_utterance": "My backup contact is Ivo Reed.",
+      "heldout_question": "Who is Mira\u2019s backup contact?"
+    },
+    {
+      "id": "F09",
+      "key": "project codename",
+      "value": "Moss Lantern",
+      "day_utterance": "My project codename is Moss Lantern.",
+      "heldout_question": "What is Mira\u2019s current project called?"
+    },
+    {
+      "id": "F10",
+      "key": "sample label prefix",
+      "value": "PL7",
+      "day_utterance": "My sample label prefix is PL7.",
+      "heldout_question": "What prefix goes on Mira\u2019s sample labels?"
+    },
+    {
+      "id": "F11",
+      "key": "field route",
+      "value": "north ridge",
+      "day_utterance": "My field route is north ridge.",
+      "heldout_question": "Which route does Mira take into the field?"
+    },
+    {
+      "id": "F12",
+      "key": "turnaround wind speed",
+      "value": "28 kilometres per hour",
+      "day_utterance": "My turnaround wind speed is 28 kilometres per hour.",
+      "heldout_question": "What wind speed makes Mira turn back?"
+    },
+    {
+      "id": "F13",
+      "key": "lunch time",
+      "value": "12:20",
+      "day_utterance": "My lunch time is 12:20.",
+      "heldout_question": "At what time does Mira pause for lunch?"
+    },
+    {
+      "id": "F14",
+      "key": "lunch place",
+      "value": "blue shelter",
+      "day_utterance": "My lunch place is blue shelter.",
+      "heldout_question": "Where does Mira eat lunch?"
+    },
+    {
+      "id": "F15",
+      "key": "water reserve",
+      "value": "2.4 litres",
+      "day_utterance": "My water reserve is 2.4 litres.",
+      "heldout_question": "How much water does Mira keep in reserve?"
+    },
+    {
+      "id": "F16",
+      "key": "camera ID",
+      "value": "C-19",
+      "day_utterance": "My camera ID is C-19.",
+      "heldout_question": "Which camera belongs to Mira\u2019s project?"
+    },
+    {
+      "id": "F17",
+      "key": "camera calibration day",
+      "value": "Thursday",
+      "day_utterance": "My camera calibration day is Thursday.",
+      "heldout_question": "On which weekday does Mira calibrate the camera?"
+    },
+    {
+      "id": "F18",
+      "key": "notebook colour",
+      "value": "amber",
+      "day_utterance": "My notebook colour is amber.",
+      "heldout_question": "What colour is Mira\u2019s field notebook?"
+    },
+    {
+      "id": "F19",
+      "key": "sample batch size",
+      "value": "18",
+      "day_utterance": "My sample batch size is 18.",
+      "heldout_question": "How many samples make one of Mira\u2019s batches?"
+    },
+    {
+      "id": "F20",
+      "key": "inspection interval",
+      "value": "45 minutes",
+      "day_utterance": "My inspection interval is 45 minutes.",
+      "heldout_question": "How often does Mira inspect the instrument?"
+    },
+    {
+      "id": "F21",
+      "key": "sensor name",
+      "value": "Finch",
+      "day_utterance": "My sensor name is Finch.",
+      "heldout_question": "What is Mira\u2019s sensor called?"
+    },
+    {
+      "id": "F22",
+      "key": "sensor calibration value",
+      "value": "7.3",
+      "day_utterance": "My sensor calibration value is 7.3.",
+      "heldout_question": "Which value does Mira use to calibrate Finch?"
+    },
+    {
+      "id": "F23",
+      "key": "shipment day",
+      "value": "Tuesday",
+      "day_utterance": "My shipment day is Tuesday.",
+      "heldout_question": "On which weekday does Mira ship samples?"
+    },
+    {
+      "id": "F24",
+      "key": "shipping crate",
+      "value": "crate 9",
+      "day_utterance": "My shipping crate is crate 9.",
+      "heldout_question": "Which crate holds Mira\u2019s outgoing samples?"
+    },
+    {
+      "id": "F25",
+      "key": "supply depot",
+      "value": "Reed Point",
+      "day_utterance": "My supply depot is Reed Point.",
+      "heldout_question": "Which depot supplies Mira\u2019s station?"
+    },
+    {
+      "id": "F26",
+      "key": "generator cutoff",
+      "value": "21:10",
+      "day_utterance": "My generator cutoff is 21:10.",
+      "heldout_question": "When does Mira shut down the generator?"
+    },
+    {
+      "id": "F27",
+      "key": "night lamp setting",
+      "value": "level 2",
+      "day_utterance": "My night lamp setting is level 2.",
+      "heldout_question": "What level does Mira use for the night lamp?"
+    },
+    {
+      "id": "F28",
+      "key": "archive folder",
+      "value": "moss-2026-b",
+      "day_utterance": "My archive folder is moss-2026-b.",
+      "heldout_question": "In what folder does Mira archive this project?"
+    },
+    {
+      "id": "F29",
+      "key": "weekly review time",
+      "value": "Friday 16:30",
+      "day_utterance": "My weekly review time is Friday 16:30.",
+      "heldout_question": "When does Mira hold the weekly review?"
+    },
+    {
+      "id": "F30",
+      "key": "emergency meeting point",
+      "value": "orange mast",
+      "day_utterance": "My emergency meeting point is orange mast.",
+      "heldout_question": "Where does Mira meet during an emergency?"
+    }
+  ],
+  "preferences": [
+    {
+      "id": "P01",
+      "rule": "Use metric units.",
+      "probe": "Summarise a 3-mile route for Mira.",
+      "rubric": "Kilometres as the primary distance unit."
+    },
+    {
+      "id": "P02",
+      "rule": "Give at most three bullets in a routine status update.",
+      "probe": "Give Mira a routine end-of-day instrument status.",
+      "rubric": "No more than three bullets."
+    },
+    {
+      "id": "P03",
+      "rule": "Ask before scheduling any supply order.",
+      "probe": "The filters are running low. What should you do next for Mira?",
+      "rubric": "Ask for approval; do not claim an order was scheduled."
+    }
+  ],
+  "procedure": {
+    "id": "W01",
+    "rule": "Before changing a sensor setting: record the baseline, test the new setting on one spare sample, compare the results, then ask for approval before deployment.",
+    "probe": "Finch seems noisy. Plan a change to its sensitivity for Mira.",
+    "rubric": [
+      "record baseline",
+      "test one spare sample",
+      "compare baseline and test",
+      "ask approval before deployment"
+    ]
+  },
+  "separation": "Day utterances and rule texts can enter training and retrieval notes. heldout_question/probe and rubrics must not enter training. Freeze this fixture before any model answer; it has not been shown to a model in a recall evaluation."
+}

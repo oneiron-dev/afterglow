@@ -1,0 +1,12 @@
+# Versions used for the 14 Oct 2026 QLoRA rate and smoke runs (Python 3.12, CUDA 13 wheels).
+torch==2.14.1
+transformers==5.15.0
+peft==0.21.2
+trl==0.22.2
+bitsandbytes==0.50.2
+datasets==4.8.5
+accelerate==1.15.0
+unsloth==2026.10.5
+safetensors==0.8.0
+huggingface-hub==1.33.0
+numpy==2.5.2

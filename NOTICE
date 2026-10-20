@@ -1,0 +1,72 @@
+glimmer-nightly
+Copyright 2026 Oneiron
+
+This product includes software developed by Oneiron, licensed under the
+Apache License, Version 2.0 (see LICENSE).
+
+-------------------------------------------------------------------------------
+Muse Glimmer (Meta)
+-------------------------------------------------------------------------------
+
+This repository does not contain Muse Glimmer weights. Its scripts download,
+run, fine-tune and convert them, and its release artifacts include a model
+derived from them:
+
+  * dflash-tuned-lr2e-05-Q4_K_M.gguf and the matching bf16 safetensors
+    checkpoint: a fine-tune of meta-models/Muse-Glimmer-30B-assistant
+    (revision e8192f3a8f617f74be2ce220360c89ef4789f39f), trained on hidden
+    states and greedy outputs of the Muse Glimmer 30B target.
+
+Muse Glimmer models and their released artifacts are provided by Meta under
+the Apache License, Version 2.0. A copy of that licence, as published with
+the model, is in licenses/GLIMMER-LICENSE.
+
+Use of Muse Glimmer, and of any model derived from it, is also subject to the
+Muse Glimmer Usage Policy. A copy, as published with the model, is in
+licenses/GLIMMER-USAGE-POLICY.md. The current version is at
+https://huggingface.co/meta-models/Muse-Glimmer-30B/blob/main/USAGE_POLICY.md
+
+Anyone who redistributes the tuned drafter must keep this notice, the
+Apache-2.0 licence and the Usage Policy with it, and must state that the
+model was modified from Meta's release.
+
+Model revisions referenced by the scripts:
+  meta-models/Muse-Glimmer-30B            a4e59da52a7bc87ae7251dd5545c0dd437c44b68
+  meta-models/Muse-Glimmer-30B-GGUF       70bf1b61ac09f91b24d39038091b41c582bc5d7a
+  meta-models/Muse-Glimmer-30B-assistant  e8192f3a8f617f74be2ce220360c89ef4789f39f
+  unsloth/Muse-Glimmer-30B-unsloth-bnb-4bit  ecedda395d4d099b477d135a9a573eedaa5a7aad
+  mlx-community/Muse-Glimmer-30B-4bit     3e7677d7a40d348a3daba263a2b1c0aa41910710
+Third-party quantisations (unsloth, mlx-community) carry their own model cards
+and licences; check them before you redistribute their files.
+
+-------------------------------------------------------------------------------
+Data
+-------------------------------------------------------------------------------
+
+UltraChat 200k (HuggingFaceH4/ultrachat_200k), MIT License. The drafter
+training prompts include 500 first turns from its train_sft split;
+examples/prompts_eval.jsonl includes 5 first turns from its test_sft split.
+
+All other example data (fictional personas, the synthetic day in
+qlora/fixtures/, the synthetic general slice) was generated for this project
+and contains no real personal data.
+
+-------------------------------------------------------------------------------
+Runtimes and libraries (used, not vendored)
+-------------------------------------------------------------------------------
+
+No third-party source code is copied into this repository. The scripts call
+or import these projects, each under its own licence:
+
+  llama.cpp (ggml-org)                MIT
+  MLX, MLX-LM (Apple)                 MIT
+  Hugging Face transformers,
+    tokenizers, safetensors,
+    accelerate, peft, trl, datasets   Apache-2.0
+  PyTorch                             BSD-3-Clause
+  bitsandbytes                        MIT
+  Unsloth                             Apache-2.0
+
+The drafter training recipe follows the DFlash paper (arXiv:2602.06036,
+CC BY 4.0) and the SpecForge DFlash objective; no code from either is
+included.
